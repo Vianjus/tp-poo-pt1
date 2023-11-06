@@ -9,10 +9,15 @@ class Apartamento: public Imovel{
     bool elevador,sacada;
 
     public:
-        Apartamento(int,int,int,int,string,string,string,string,float,int=0,float=0,float=0,bool=false,bool=false);
+        Apartamento(int,int,int,int,string,string,string,string,float,int=0,float=0,bool=false,bool=false);
         int getAndar();
         void setAndar(int);
-};
+        float getTaxaCondominio();
+        void SetTaxaCondominio(float=0);
+        bool getElevador();
+        void setElevador(bool=false);
 
+
+};
 
 #endif
