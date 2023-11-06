@@ -3,8 +3,8 @@
 
 Imovel :: Imovel(int n1,int n2,int n3,int n4,string s1,string s2,string s3,string s4,float f1){
     id = n1; numero = n2; quartos = n3; banheiros = n4;
-    valor = f1;
     proprietario = s1; rua = s2; bairro = s3; cidade = s4;
+    valor = f1;
 }
 int Imovel :: getId(){
     return id;

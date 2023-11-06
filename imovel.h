@@ -7,8 +7,8 @@ using namespace std;
 class Imovel{
 
     int id,numero,quartos,banheiros;
-    float valor;
     string proprietario,rua,bairro,cidade;
+    float valor;
 
     public:
         Imovel(int=0,int=0,int=0,int=0,string="",string="",string="",string="",float=0);
