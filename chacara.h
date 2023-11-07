@@ -17,6 +17,7 @@ class Chacara: public Imovel{
         void setChurrasqueira(bool=false);
         bool getPiscina();
         void setPiscina(bool=false);
+        friend ostream& operator<<(ostream&,const Chacara);
 };
 
 
