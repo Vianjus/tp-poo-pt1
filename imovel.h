@@ -30,6 +30,7 @@ class Imovel{
         void setQuartos(int);
         int getBanheiros();
         void setBanheiros(int);
+        friend ostream& operator<<(ostream&,const Imovel);
 
 };
 

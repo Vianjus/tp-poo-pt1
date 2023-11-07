@@ -60,3 +60,9 @@ int Imovel :: getBanheiros(){
 void Imovel :: setBanheiros(int n){
     banheiros = n;
 }
+
+ostream& operator<<(ostream& os,const Imovel x){
+    os << "-----" << endl << x.proprietario << endl << x.valor << endl << x.quartos << endl << x.rua << endl << x.bairro << endl << x.cidade << endl;
+    return os;
+}
+

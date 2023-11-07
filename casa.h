@@ -1,7 +1,10 @@
 #ifndef CASA_H_
 #define CASA_H_
+#include "imovel.h"
+#include <string>
+using namespace std;
 
-class Casa: public Imovel{ //casa herda de imovel
+class Casa: public Imovel { //casa herda de imovel
     int andares;
     bool sala_jantar;
 
@@ -11,6 +14,7 @@ class Casa: public Imovel{ //casa herda de imovel
         void setAndares(int);
         bool getSalaJantar();
         void setSalaJantar(bool);
+        friend ostream& operator<<(ostream&,const Casa);
 };
 
 

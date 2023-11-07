@@ -1,5 +1,7 @@
 #ifndef APARTAMENTO_H_
 #define APARTAMENTO_H_
+#include "imovel.h"
+#include <string>
 
 using namespace std;
 
@@ -16,6 +18,7 @@ class Apartamento: public Imovel{
         void SetTaxaCondominio(float=0);
         bool getElevador();
         void setElevador(bool=false);
+        friend ostream& operator<<(ostream&,const Apartamento);
 
 
 };
