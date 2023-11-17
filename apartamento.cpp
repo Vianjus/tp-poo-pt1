@@ -4,9 +4,9 @@
 #include <ostream>
 
 
-Apartamento :: Apartamento(int n1,int n2,int n3,int n4,string s1,string s2,string s3,string s4,float f1,int n5,float f2,bool b1,bool b2) : Imovel(n1,n2,n3,n4,s1,s2,s3,s4,f1) {
+Apartamento :: Apartamento(int n1,float f2, string s1, string s2, string s3, string s4, int n2, int n3, int n4,int n5,float f1,bool b1,bool b2) : Imovel(n1,f2,s1,s2,s3,s4,n2,n3,n4) {
     andar = n5;
-    taxa_condominio = f2;
+    taxa_condominio = f1;
     elevador = b1; sacada = b2;
 }
 
@@ -34,8 +34,9 @@ void Apartamento :: setElevador(bool b){
     elevador = b;
 }
 
-ostream& operator<<(ostream& os,const Apartamento c){
-    os << static_cast<const Imovel&>(c);
-    os << c.elevador << endl;
+
+ostream& operator<<(ostream& os, const Apartamento apartamento) {
+    os << static_cast<const Imovel&>(apartamento);
+    os << "Característica Específica: Possui elevador: " << (apartamento.elevador ? "Sim": "Não") << endl;
     return os;
 }

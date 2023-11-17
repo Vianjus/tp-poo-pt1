@@ -1,7 +1,7 @@
 #ifndef IMOVEL_H_
 #define IMOVEL_H_
 #include <string>
-
+#include <vector>
 using namespace std;
 
 class Imovel{
@@ -11,12 +11,12 @@ class Imovel{
     float valor;
 
     public:
-        Imovel(int=0,int=0,int=0,int=0,string="",string="",string="",string="",float=0);
+        Imovel(int=0,float=0,string="",string="",string="",string="",int = 0, int = 0, int = 0);
         int getId();
         void setId(int);
         float getValor();
         void setValor(float);
-        string getProprietario();
+        string getProprietario() const;
         void setProprietario(string);
         string getRua();
         void setRua(string);
@@ -32,6 +32,10 @@ class Imovel{
         void setBanheiros(int);
         friend ostream& operator<<(ostream&,const Imovel);
 
+        virtual ~Imovel() = default; // Destrutor virtual
 };
+bool possuiImovelDoProprietario(const vector<Imovel*>&, const string&);
+void imprimirOuSalvar(const vector<Imovel*>& );
 
 #endif
+

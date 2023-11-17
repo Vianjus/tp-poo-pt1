@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -8,6 +9,7 @@
 #include "casa.h"
 #include "apartamento.h"
 #include "chacara.h"
+#include <cstring>
 
 using namespace std;
 
@@ -61,7 +63,7 @@ vector <Imovel*> leArquivo(){
       arquivo >> aux;
       arquivo >> sacada;
       arquivo >> aux;
-      Apartamento* apartamento = new Apartamento(0,numero,quartos,banheiros,proprietario,rua,bairro,cidade,valor,andar,taxa_condominio,elevador,sacada);
+      Apartamento* apartamento = new Apartamento(0, valor, proprietario, rua, bairro, cidade, numero, quartos, banheiros, taxa_condominio, andar, elevador, sacada);
       imoveis.push_back(apartamento);
     }
     else if(tipo == "casa"){
@@ -70,7 +72,7 @@ vector <Imovel*> leArquivo(){
       arquivo >> aux;
       arquivo >> sala_jantar;
       arquivo >> aux;
-      Casa* casa = new Casa(0,numero,quartos,banheiros,proprietario,rua,bairro,cidade,valor,andar,sala_jantar);
+      Casa* casa = new Casa(0, valor, proprietario, rua, bairro, cidade, numero, quartos, banheiros, andar, sala_jantar);
       imoveis.push_back(casa);
     }
     else if(tipo == "chacara"){
@@ -85,13 +87,29 @@ vector <Imovel*> leArquivo(){
       arquivo >> aux;
       arquivo >> piscina;
       arquivo >> aux;
-      Chacara* chacara = new Chacara(0,numero,quartos,banheiros,proprietario,rua,bairro,cidade,valor,salao_festas,salao_jogos,campo_futebol,churrasqueira,piscina);
+      Chacara* chacara = new Chacara(id, valor, proprietario, rua, bairro, cidade, numero, quartos, banheiros, salao_festas, salao_jogos, campo_futebol, churrasqueira, piscina);
       imoveis.push_back(chacara);
       }
 
     arquivo.ignore(numeric_limits<streamsize>::max(), '\n');
 
   }
+
+cout << "Tamanho do vetor: " << imoveis.size() << endl;//teste
+
+imprimirOuSalvar(imoveis);
+
+string nomeProp;
+cout << "PROPRIETARIO NOME: " << endl;
+cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
+getline(cin, nomeProp);
+
+bool possui = possuiImovelDoProprietario(imoveis, nomeProp);
+if (possui) {
+        cout << "O proprietário possui pelo menos um imóvel." << endl;
+    } else {
+        cout << "O proprietário não possui nenhum imóvel." << endl;
+    }
 
   return imoveis;
 }

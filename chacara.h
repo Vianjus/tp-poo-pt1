@@ -6,7 +6,7 @@ class Chacara: public Imovel{
     bool salao_festa,salao_jogos,campo_futebol,churrasqueira,piscina;
 
     public:
-        Chacara(int,int,int,int,string,string,string,string,float,bool=false,bool=false,bool=false,bool=false,bool=false);
+        Chacara(int, float, string, string, string, string, int, int, int,bool=false,bool=false,bool=false,bool=false,bool=false);
         bool getSalaoFesta();
         void setSalaoFesta(bool=false);
         bool getSalaoJogos();

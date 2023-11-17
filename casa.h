@@ -9,7 +9,7 @@ class Casa: public Imovel { //casa herda de imovel
     bool sala_jantar;
 
     public:
-        Casa(int,int,int,int,string,string,string,string,float,int=0,bool=0);
+        Casa(int,float, string, string, string, string, int, int, int, int=0,bool=0);
         int getAndares();
         void setAndares(int);
         bool getSalaJantar();
