@@ -30,7 +30,7 @@ vector <Imovel*> leArquivo(){
   bool elevador,sacada,sala_jantar,salao_festas,salao_jogos,campo_futebol,churrasqueira,piscina;
 
   ifstream arquivo;
-  arquivo.open("database_imoveis.txt");
+  arquivo.open("data/database_imoveis.txt");
 
   if(!arquivo.is_open()){
     cerr << "erro ao abrir o arquivo" << endl;
