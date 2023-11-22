@@ -10,6 +10,7 @@
 #include "apartamento.h"
 #include "chacara.h"
 #include <cstring>
+#include <string.h>
 
 using namespace std;
 
@@ -23,7 +24,7 @@ int main(){
 
 vector <Imovel*> leArquivo(){
 
-  int id,numero,quartos,banheiros,andar;
+  int numero,quartos,banheiros,andar;
   float valor,taxa_condominio;
   char aux;
   string tipo,proprietario,rua,bairro,cidade,valores;
@@ -63,7 +64,7 @@ vector <Imovel*> leArquivo(){
       arquivo >> aux;
       arquivo >> sacada;
       arquivo >> aux;
-      Apartamento* apartamento = new Apartamento(0, valor, proprietario, rua, bairro, cidade, numero, quartos, banheiros, taxa_condominio, andar, elevador, sacada);
+      Apartamento* apartamento = new Apartamento(1, valor, proprietario, rua, bairro, cidade, numero, quartos, banheiros, taxa_condominio, andar, elevador, sacada);
       imoveis.push_back(apartamento);
     }
     else if(tipo == "casa"){
@@ -72,7 +73,7 @@ vector <Imovel*> leArquivo(){
       arquivo >> aux;
       arquivo >> sala_jantar;
       arquivo >> aux;
-      Casa* casa = new Casa(0, valor, proprietario, rua, bairro, cidade, numero, quartos, banheiros, andar, sala_jantar);
+      Casa* casa = new Casa(2, valor, proprietario, rua, bairro, cidade, numero, quartos, banheiros, andar, sala_jantar);
       imoveis.push_back(casa);
     }
     else if(tipo == "chacara"){
@@ -87,7 +88,7 @@ vector <Imovel*> leArquivo(){
       arquivo >> aux;
       arquivo >> piscina;
       arquivo >> aux;
-      Chacara* chacara = new Chacara(id, valor, proprietario, rua, bairro, cidade, numero, quartos, banheiros, salao_festas, salao_jogos, campo_futebol, churrasqueira, piscina);
+      Chacara* chacara = new Chacara(3, valor, proprietario, rua, bairro, cidade, numero, quartos, banheiros, salao_festas, salao_jogos, campo_futebol, churrasqueira, piscina);
       imoveis.push_back(chacara);
       }
 
