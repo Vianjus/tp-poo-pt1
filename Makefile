@@ -7,7 +7,7 @@ TARGET = meu_programa
 CC = g++
 
 # Opções de compilação
-CFLAGS = -Wall 
+CFLAGS = -Wall -Wextra
 
 # Diretórios dos arquivos fonte, objeto e cabeçalho
 SRCDIR = src

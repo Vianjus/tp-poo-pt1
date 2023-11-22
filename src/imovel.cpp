@@ -4,6 +4,7 @@
 #include "chacara.h"
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 
 Imovel :: Imovel(int n1,float f1,string s1,string s2,string s3,string s4,int n2,int n3,int n4){
     id = n1; numero = n2; quartos = n3; banheiros = n4;
@@ -16,7 +17,7 @@ int Imovel :: getId(){
 void Imovel :: setId(int valor){
     id = valor;
 }
-float Imovel :: getValor(){
+float Imovel :: getValor()const {
     return valor;
 }
 void Imovel :: setValor(float valor){
@@ -126,4 +127,48 @@ void imprimirOuSalvar(const vector<Imovel*>& imoveis) {
     } else {
         cout << "Escolha inválida. Nada será feito." << endl;
     }
+}
+
+bool compararPorValor(const Imovel* a, const Imovel* b) {
+    return a->getValor() < b->getValor();
+}
+vector <Imovel*> obterImoveisPorTipo(const std::vector<Imovel*>& imoveis, const std::string& tipo) {
+    std::vector<Imovel*> imoveisDoTipo;
+
+    int codigoTipo = -1; // Inicialize com um valor que não corresponda a nenhum tipo válido
+
+    if (tipo == "casa") {
+        codigoTipo = 1;
+    } else if (tipo == "apartamento") {
+        codigoTipo = 2;
+    } else if (tipo == "chacara") {
+        codigoTipo = 3;
+    }
+
+    if (codigoTipo != -1) {
+        for (Imovel* imovel : imoveis) {
+            if (imovel->getId() == codigoTipo) {
+                imoveisDoTipo.push_back(imovel);
+            }
+        }
+
+        // Ordena por valor
+        sort(imoveisDoTipo.begin(), imoveisDoTipo.end(), compararPorValor);
+    }
+
+    return imoveisDoTipo;
+}
+
+vector<vector <Imovel*>:: iterator> getIterators(vector<Imovel*>& imoveis, string proprietario){
+    vector<vector<Imovel*> :: iterator> iteradores; //declara o vetor de iteradores
+    vector<Imovel*> :: iterator it;
+    
+    for(it = imoveis.begin();it != imoveis.end(); ++it){
+        if((*it)->getProprietario() == proprietario){
+            iteradores.push_back(it);
+        }
+    }
+
+    return iteradores;
+    
 }

@@ -18,8 +18,98 @@ vector <Imovel*> leArquivo();
 
 int main(){
 
+  int aux =-1;
   vector <Imovel*> imoveis = leArquivo();
+  string nomeProp;
+  string tipo;
+  vector<Imovel*> imoveisOrdenados;
+  vector <vector<Imovel*> :: iterator> iteradores;
+  bool possui;
+
+  do //Menu da Imobiliária
+  {
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
+    cout<<"Menu da imobiliária"<<endl;
+    cout<<"\nOpção [1] -> Verificar se o nome possui algum imóvel."<<endl;
+    cout<<"Opção [2] -> Verficar imóveis compatíveis com o valor."<<endl;
+    cout<<"Opção [3] -> Verificar imóveis compatíveis com a quantidade de quartos requerida."<<endl;
+    cout<<"Opção [4] -> Verificar todos os imóveis por tipo."<<endl;
+    cout<<"Opção [5] -> Verificar imóveis em de uma cidade."<<endl;
+    cout<<"Opção [6] -> Verificar imóveis de um proprietário."<<endl;
+    cout<<"Opção [7] -> Criar arquivo de saída."<<endl;
+    cout<<"Opção [0] -> Encerrar o programa."<<endl;
+    cout<<"\nDigite a operação: "; cin>>aux;
+
+    
+
+    switch (aux)
+    {
+    case 0: //Opção [0] -> Encerrar o programa.
+      system("clear");
+      cout<<"Fechando programa ..."<<endl;
+      break;
+
+    case 1: //Opção [1] -> Verificar se o nome possui algum imóvel
+      cout << "PROPRIETARIO NOME: " << endl;
+      cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
+      getline(cin, nomeProp);
+
+      possui = possuiImovelDoProprietario(imoveis, nomeProp);
+      if (possui) {
+        cout << "O proprietário possui pelo menos um imóvel." << endl;
+        } else {
+        cout << "O proprietário não possui nenhum imóvel." << endl;
+        }
+      cout<< "Pressione qualquer tecla para retornar.";
+      getchar();
+      system("clear");
+      break;
+
+    case 2: //Opção [2] -> Verficar imóveis compatíveis com o valor.
+
+      break;
+
+    case 3: //Opção [3] -> Verificar imóveis compatíveis com a quantidade de quartos requerida.
+
+      break;
+
+    case 4: //Opção [4] -> Verificar todos os imóveis por tipo.
+
+      break;
+
+    case 5: //Opção [5] -> Verificar imóveis em de uma cidade.
+      cout << "Insira o tipo do imovel" << endl; 
+      cin>>tipo;
+      imoveisOrdenados = obterImoveisPorTipo(imoveis, "casa");
+
+      break;
+
+    case 6: //Opção [6] -> Verificar imóveis de um proprietário.
+      cout << "Insira o nome do proprietário " << endl;
+      cin >> nomeProp;
+      iteradores = getIterators(imoveis,nomeProp);
+      for(auto it = iteradores.begin();it != iteradores.end();++it){
+        cout << **it << endl;
+      }
+      break;
+    
+    case 7: //Opção [7] -> Criar arquivo de saída.
+      imprimirOuSalvar(imoveis);
+      cout<< "Pressione qualquer tecla para retornar.";
+      getchar();
+      system("clear");
+      break;
+    
+    default:
+      cout<<"Comando não indentificado."<<endl<<"Digite qualquer tecla para reiniciar:"<<endl;getchar();
+      aux=-1;
+      system("clear");
+      break;
+    }
+  } while (aux != 0);
   
+  
+  return 0;
 }
 
 vector <Imovel*> leArquivo(){
@@ -96,21 +186,7 @@ vector <Imovel*> leArquivo(){
 
   }
 
-cout << "Tamanho do vetor: " << imoveis.size() << endl;//teste
-
-imprimirOuSalvar(imoveis);
-
-string nomeProp;
-cout << "PROPRIETARIO NOME: " << endl;
-cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
-getline(cin, nomeProp);
-
-bool possui = possuiImovelDoProprietario(imoveis, nomeProp);
-if (possui) {
-        cout << "O proprietário possui pelo menos um imóvel." << endl;
-    } else {
-        cout << "O proprietário não possui nenhum imóvel." << endl;
-    }
+//cout << "Tamanho do vetor: " << imoveis.size() << endl;//teste
 
   return imoveis;
 }

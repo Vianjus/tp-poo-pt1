@@ -25,3 +25,5 @@ ostream& operator<<(ostream& os, const Casa casa) {
        << "Característica Específica: Quantidade de Andares: " << casa.andares << endl;
     return os;
 }
+
+

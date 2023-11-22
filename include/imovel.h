@@ -14,7 +14,7 @@ class Imovel{
         Imovel(int=0,float=0,string="",string="",string="",string="",int = 0, int = 0, int = 0);
         int getId();
         void setId(int);
-        float getValor();
+        float getValor() const;
         void setValor(float);
         string getProprietario() const;
         void setProprietario(string);
@@ -36,6 +36,10 @@ class Imovel{
 };
 bool possuiImovelDoProprietario(const vector<Imovel*>&, const string&);
 void imprimirOuSalvar(const vector<Imovel*>& );
+bool compararPorValor(const Imovel*, const Imovel*);
+vector<vector <Imovel*>:: iterator> getIterators(vector<Imovel*>&, string);
+vector<Imovel*> obterImoveisPorTipo(const std::vector<Imovel*>&, const std::string);
+        
 
 #endif
 
