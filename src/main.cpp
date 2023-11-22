@@ -11,6 +11,7 @@
 #include "chacara.h"
 #include <cstring>
 #include <string.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -28,7 +29,7 @@ int main(){
 
   do //Menu da Imobiliária
   {
-    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
+    //cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
     cout<<"Menu da imobiliária"<<endl;
     cout<<"\nOpção [1] -> Verificar se o nome possui algum imóvel."<<endl;
     cout<<"Opção [2] -> Verficar imóveis compatíveis com o valor."<<endl;
@@ -45,7 +46,7 @@ int main(){
     switch (aux)
     {
     case 0: //Opção [0] -> Encerrar o programa.
-      system("clear");
+      //system("clear");
       cout<<"Fechando programa ..."<<endl;
       break;
 
@@ -74,28 +75,45 @@ int main(){
       break;
 
     case 4: //Opção [4] -> Verificar todos os imóveis por tipo.
+      
+      cout << "Insira o tipo do imovel" << endl; 
+      cin>>tipo;
+      imoveisOrdenados = obterImoveisPorTipo(imoveis, tipo);
 
+      cout<< "Pressione qualquer tecla para retornar.";
+      getchar();
+      getchar();
+      system("clear");
       break;
 
     case 5: //Opção [5] -> Verificar imóveis em de uma cidade.
-      cout << "Insira o tipo do imovel" << endl; 
-      cin>>tipo;
-      imoveisOrdenados = obterImoveisPorTipo(imoveis, "casa");
+      
+
+
 
       break;
 
     case 6: //Opção [6] -> Verificar imóveis de um proprietário.
-      cout << "Insira o nome do proprietário " << endl;
-      cin >> nomeProp;
+      cout << "Insira o nome do proprietário: " << endl;
+      cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
+      getline(cin, nomeProp);
+
+      system("clear");
       iteradores = getIterators(imoveis,nomeProp);
-      for(auto it = iteradores.begin();it != iteradores.end();++it){
-        cout << **it << endl;
+
+      for(auto it = iteradores.begin();it != iteradores.end();it++){
+        cout << ***it << endl;
       }
+
+      cout<< "Pressione qualquer tecla para retornar.";
+      getchar();
+      system("clear");
       break;
     
     case 7: //Opção [7] -> Criar arquivo de saída.
       imprimirOuSalvar(imoveis);
       cout<< "Pressione qualquer tecla para retornar.";
+      getchar();
       getchar();
       system("clear");
       break;

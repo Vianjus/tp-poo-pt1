@@ -38,7 +38,7 @@ bool possuiImovelDoProprietario(const vector<Imovel*>&, const string&);
 void imprimirOuSalvar(const vector<Imovel*>& );
 bool compararPorValor(const Imovel*, const Imovel*);
 vector<vector <Imovel*>:: iterator> getIterators(vector<Imovel*>&, string);
-vector<Imovel*> obterImoveisPorTipo(const std::vector<Imovel*>&, const std::string);
+vector<Imovel*> obterImoveisPorTipo(const std::vector<Imovel*>&, const std::string&);
         
 
 #endif

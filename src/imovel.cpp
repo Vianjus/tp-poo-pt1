@@ -132,7 +132,8 @@ void imprimirOuSalvar(const vector<Imovel*>& imoveis) {
 bool compararPorValor(const Imovel* a, const Imovel* b) {
     return a->getValor() < b->getValor();
 }
-vector <Imovel*> obterImoveisPorTipo(const std::vector<Imovel*>& imoveis, const std::string& tipo) {
+
+vector<Imovel*> obterImoveisPorTipo(const std::vector<Imovel*>& imoveis, const std::string& tipo) {
     std::vector<Imovel*> imoveisDoTipo;
 
     int codigoTipo = -1; // Inicialize com um valor que não corresponda a nenhum tipo válido
@@ -154,16 +155,33 @@ vector <Imovel*> obterImoveisPorTipo(const std::vector<Imovel*>& imoveis, const 
 
         // Ordena por valor
         sort(imoveisDoTipo.begin(), imoveisDoTipo.end(), compararPorValor);
+        for (const Imovel* imovel : imoveis) {
+            if(tipo == "casa"){
+                if (const Casa* casa = dynamic_cast<const Casa*>(imovel)) {
+                    cout << *casa;
+                } 
+            }else if (tipo =="apartamento"){
+                if(const Apartamento* apartamento = dynamic_cast<const Apartamento*>(imovel)) {
+                cout << *apartamento;}
+            } else if (tipo =="chacara"){
+                if(const Chacara* chacara = dynamic_cast<const Chacara*>(imovel)) {
+                cout << *chacara;
+                }
+            }
+            
+            cout << "------------------------" << endl;
+        }
     }
+
 
     return imoveisDoTipo;
 }
 
-vector<vector <Imovel*>:: iterator> getIterators(vector<Imovel*>& imoveis, string proprietario){
+vector<vector <Imovel*> :: iterator> getIterators(vector<Imovel*>& imoveis, string proprietario){
     vector<vector<Imovel*> :: iterator> iteradores; //declara o vetor de iteradores
     vector<Imovel*> :: iterator it;
     
-    for(it = imoveis.begin();it != imoveis.end(); ++it){
+    for(it = imoveis.begin();it != imoveis.end();it++){
         if((*it)->getProprietario() == proprietario){
             iteradores.push_back(it);
         }
