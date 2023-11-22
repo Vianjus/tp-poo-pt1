@@ -1,3 +1,4 @@
 saida.txt
 bin/meu_programa
 obj/*.o
+.vscode
