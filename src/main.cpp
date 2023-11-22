@@ -1,17 +1,19 @@
 
-#include <iostream>
-#include <fstream>
+#include <limits>
 #include <vector>
 #include <string>
 #include <sstream>
-#include <limits>
-#include "imovel.h"
-#include "casa.h"
-#include "apartamento.h"
-#include "chacara.h"
-#include <cstring>
-#include <string.h>
 #include <stdio.h>
+#include <cstring>
+#include <fstream>
+#include <iostream>
+#include <algorithm>
+
+#include "casa.h"
+#include "imovel.h"
+#include <string.h>
+#include "chacara.h"
+#include "apartamento.h"
 
 using namespace std;
 
@@ -19,11 +21,17 @@ vector <Imovel*> leArquivo();
 
 int main(){
 
-  int aux =-1;
+  float valor;
+  string tipo;
+  string cidade;
+  int aux =-1,n;
   vector <Imovel*> imoveis = leArquivo();
   string nomeProp;
-  string tipo;
   vector<Imovel*> imoveisOrdenados;
+  vector<Imovel*> imoveisPorQuartos;
+  vector<Imovel*> imoveisPorValor;
+  vector<Imovel*> imoveisPorCidade;
+  
   vector <vector<Imovel*> :: iterator> iteradores;
   bool possui;
 
@@ -67,16 +75,44 @@ int main(){
       break;
 
     case 2: //Opção [2] -> Verficar imóveis compatíveis com o valor.
+      cout << "Digite o valor: " ;
+      cin >> valor;
+      cout << endl;
 
+      imoveisPorValor = obterImoveisAbaixoValor(valor, imoveis);
+      for(auto it = imoveisPorValor.begin();it != imoveisPorValor.end(); it++){
+        cout << **it << endl; 
+        cout<< "-------------------------------------"<<endl;
+      }
+
+      cout<< "Pressione qualquer tecla para retornar.";
+      getchar();
+      getchar();
+      system("clear");
       break;
 
     case 3: //Opção [3] -> Verificar imóveis compatíveis com a quantidade de quartos requerida.
-
+      cout << "Insira o número de quartos" << endl;
+      cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
+      cin>>n;
+      imoveisPorQuartos = obterImoveisPorQuartos(imoveis,n);
+      
+      for(auto it = imoveisPorQuartos.begin();it != imoveisPorQuartos.end(); it++){
+        cout << **it; 
+        cout<< "-------------------------------------"<<endl;
+      }
+      
+      cout<< "Pressione qualquer tecla para retornar.";
+      getchar();
+      getchar();
+      system("clear");
+      break;
+      
       break;
 
     case 4: //Opção [4] -> Verificar todos os imóveis por tipo.
       
-      cout << "Insira o tipo do imovel" << endl; 
+      cout << "Insira o tipo do imovel: "; 
       cin>>tipo;
       imoveisOrdenados = obterImoveisPorTipo(imoveis, tipo);
 
@@ -88,8 +124,19 @@ int main(){
 
     case 5: //Opção [5] -> Verificar imóveis em de uma cidade.
       
-
-
+      cout << "Digite o nome da cidade: " ;
+      getchar();
+      getline(cin, cidade);
+      imoveisPorCidade = imoveisPorCidadeDescresc(imoveis, cidade);
+      
+      for(auto it = imoveisPorCidade.begin();it != imoveisPorCidade.end(); it++){
+        cout << **it; 
+        cout<< "-------------------------------------"<<endl;
+      }
+      
+      cout<< "Pressione qualquer tecla para retornar.";
+      getchar();
+      system("clear");
 
       break;
 

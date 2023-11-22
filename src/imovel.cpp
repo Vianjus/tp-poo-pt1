@@ -190,3 +190,43 @@ vector<vector <Imovel*> :: iterator> getIterators(vector<Imovel*>& imoveis, stri
     return iteradores;
     
 }
+
+vector<Imovel*> obterImoveisAbaixoValor(float valor, std::vector<Imovel*> &imoveis)
+{
+     vector<Imovel*> imoveis1;
+    for(Imovel* imovel : imoveis){
+        if(imovel->getValor() <= valor){
+            imoveis1.push_back(imovel);
+        }
+    }
+    return imoveis1;
+}
+
+vector<Imovel*> imoveisPorCidadeDescresc(vector<Imovel*> imoveis, string cidadeAlvo) {
+    vector <Imovel*> imoveisOrdenados;
+    if (!imoveis.empty()) {
+        for (Imovel *imovel : imoveis) {
+            if (imovel->getCidade() == cidadeAlvo) 
+                imoveisOrdenados.push_back(imovel);
+        }
+    }
+
+    if (!imoveisOrdenados.empty()) {
+        sort(imoveisOrdenados.begin(), imoveisOrdenados.end(), [](const Imovel *imovel1, const Imovel *imovel2){
+            return imovel1->getValor() > imovel2->getValor();
+        });
+    }
+
+    return imoveisOrdenados;
+}
+
+vector<Imovel*> obterImoveisPorQuartos(const vector<Imovel*>& imoveis,int n){
+    vector<Imovel*> imoveis1;
+    for(Imovel* imovel : imoveis){
+        if(imovel->getQuartos() >= n){
+            imoveis1.push_back(imovel);
+        }
+    }
+    return imoveis1;
+}
+
