@@ -166,7 +166,7 @@ int main(){
       break;
     
     default:
-      cout<<"Comando não indentificado."<<endl<<"Digite qualquer tecla para reiniciar:"<<endl;getchar();
+      cout<<"Comando não indentificado."<<endl<<"Digite qualquer tecla para reiniciar:"<<endl;getchar();getchar();
       aux=-1;
       system("clear");
       break;
