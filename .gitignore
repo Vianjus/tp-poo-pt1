@@ -1,5 +1,3 @@
 saida.txt
-obj/apartamento.o
-obj/imovel.o
-obj/chacara.o
-obj/casa.o
+bin/meu_programa
+obj/*.o
