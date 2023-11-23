@@ -21,16 +21,13 @@ vector <Imovel*> leArquivo();
 
 int main(){
 
+  //Declarações de variáveis auxiliares
   float valor;
-  string tipo;
-  string cidade;
-  int aux =-1,n;
+  int n;
+  char aux = '9';
+  string tipo, cidade, nomeProp;
   vector <Imovel*> imoveis = leArquivo();
-  string nomeProp;
-  vector<Imovel*> imoveisOrdenados;
-  vector<Imovel*> imoveisPorQuartos;
-  vector<Imovel*> imoveisPorValor;
-  vector<Imovel*> imoveisPorCidade;
+  vector<Imovel*> resultado;
   
   vector <vector<Imovel*> :: iterator> iteradores;
   bool possui;
@@ -53,12 +50,12 @@ int main(){
 
     switch (aux)
     {
-    case 0: //Opção [0] -> Encerrar o programa.
+    case '0': //Opção [0] -> Encerrar o programa.
       system("clear");
       cout<<"[X] Programa finalizado."<<endl;
       break;
 
-    case 1: //Opção [1] -> Verificar se o nome possui algum imóvel
+    case '1': //Opção [1] -> Verificar se o nome possui algum imóvel
       cout << "Digite o nome:";
       cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
       getline(cin, nomeProp);
@@ -75,86 +72,94 @@ int main(){
       system("clear");
       break;
 
-    case 2: //Opção [2] -> Verficar imóveis compatíveis com o valor.
+    case '2': //Opção [2] -> Verficar imóveis compatíveis com o valor.
       cout << "Digite o valor: " ;
       cin >> valor;
       cout << endl;
       system("clear");
 
-      imoveisPorValor = obterImoveisAbaixoValor(valor, imoveis);
-      if (imoveisPorValor.begin() == imoveisPorValor.end())
+      resultado = obterImoveisAbaixoValor(valor, imoveis);
+      if (resultado.begin() == resultado.end())
       {
         cout<<"[!] Não possui nenhum imóvel com esse valor ou menos!"<<endl;
       }
-      
-      for(auto it = imoveisPorValor.begin();it != imoveisPorValor.end(); it++){
-        cout << **it << endl; 
-        cout<< "-------------------------------------"<<endl;
+      else{
+        for(auto it = resultado.begin();it != resultado.end(); it++){
+          cout << **it << endl; 
+          cout<< "-------------------------------------"<<endl;
+        }
       }
 
       cout<< "\nPressione qualquer tecla para retornar.";
       getchar();
       getchar();
+      resultado.clear();
       system("clear");
       break;
 
-    case 3: //Opção [3] -> Verificar imóveis compatíveis com a quantidade de quartos requerida.
+    case '3': //Opção [3] -> Verificar imóveis compatíveis com a quantidade de quartos requerida.
       cout << "Insira o número de quartos:";
       cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
       cin>>n;
-      imoveisPorQuartos = obterImoveisPorQuartos(imoveis,n);
+      resultado = obterImoveisPorQuartos(imoveis,n);
       system("clear");
-      for(auto it = imoveisPorQuartos.begin();it != imoveisPorQuartos.end(); it++){
-        cout << **it; 
-        cout<< "-------------------------------------"<<endl;
+      if (resultado.begin()==resultado.end())
+      {
+        cout<<"[!] Não há propriedades com essa quantidade de quartos!"<<endl;
       }
-      
+      else{
+        for(auto it = resultado.begin();it != resultado.end(); it++){
+          cout << **it; 
+          cout<< "-------------------------------------"<<endl;
+        }
+      }
       cout<< "Pressione qualquer tecla para retornar.";
       getchar();
       getchar();
+      resultado.clear();
       system("clear");
       break;
-      
-      break;
 
-    case 4: //Opção [4] -> Verificar todos os imóveis por tipo.
+    case '4': //Opção [4] -> Verificar todos os imóveis por tipo.
       
       cout << "Insira o tipo do imovel: "; 
       cin>>tipo;
       system("clear");
-      imoveisOrdenados = obterImoveisPorTipo(imoveis, tipo);
-      if(imoveisOrdenados.begin()==imoveisOrdenados.end())
+      resultado = obterImoveisPorTipo(imoveis, tipo);
+      if(resultado.begin()==resultado.end())
         cout<<"[!] Tipo inválido ou nenhuma casa com esse tipo.\n"<<endl;
 
       cout<< "Pressione qualquer tecla para retornar.";
       getchar();
       getchar();
+      resultado.clear();
       system("clear");
       break;
 
-    case 5: //Opção [5] -> Verificar imóveis em de uma cidade.
+    case '5': //Opção [5] -> Verificar imóveis em de uma cidade.
       
       cout << "Digite o nome da cidade: " ;
       getchar();
       getline(cin, cidade);
       system("clear");
-      imoveisPorCidade = imoveisPorCidadeDescresc(imoveis, cidade);
-      if (imoveisPorCidade.begin()==imoveisPorCidade.end())
+      resultado = imoveisPorCidadeDescresc(imoveis, cidade);
+      if (resultado.begin()==resultado.end())
         cout<<"[!] Não há nenhum imóvel nessa cidade!\n"<<endl;
       
       
-      for(auto it = imoveisPorCidade.begin();it != imoveisPorCidade.end(); it++){
+      for(auto it = resultado.begin();it != resultado.end(); it++){
         cout << **it; 
         cout<< "-------------------------------------"<<endl;
       }
       
       cout<< "Pressione qualquer tecla para retornar.";
       getchar();
+      resultado.clear();
       system("clear");
 
       break;
 
-    case 6: //Opção [6] -> Verificar imóveis de um proprietário.
+    case '6': //Opção [6] -> Verificar imóveis de um proprietário.
       cout << "Insira o nome do proprietário: " << endl;
       cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
       getline(cin, nomeProp);
@@ -162,17 +167,23 @@ int main(){
       system("clear");
       iteradores = getIterators(imoveis,nomeProp);
 
-      for(auto it = iteradores.begin();it != iteradores.end();it++){
-        cout << ***it;
-        cout<<"-------------------------------------"<<endl;
+      if (iteradores.begin()==iteradores.end())
+      {
+        cout<<"[!] Esse nome não é proprietário de nenhum imóvel!\n"<<endl;
       }
-
+      else{
+        for(auto it = iteradores.begin();it != iteradores.end();it++){
+          cout << ***it;
+          cout<<"-------------------------------------"<<endl;
+        }
+      }
       cout<< "Pressione qualquer tecla para retornar.";
       getchar();
+      iteradores.clear();
       system("clear");
       break;
     
-    case 7: //Opção [7] -> Criar arquivo de saída.
+    case '7': //Opção [7] -> Criar arquivo de saída.
       imprimirOuSalvar(imoveis);
       cout<< "Pressione qualquer tecla para retornar.";
       getchar();
@@ -181,7 +192,9 @@ int main(){
       break;
     
     default:
-      cout<<"Comando não indentificado."<<endl<<"Digite qualquer tecla para reiniciar:"<<endl;getchar();getchar();
+      cout<<"Comando não indentificado."<<endl<<"Digite qualquer tecla para reiniciar:"<<endl;
+      cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
+      getchar();
       aux=-1;
       system("clear");
       break;

@@ -86,14 +86,14 @@ bool possuiImovelDoProprietario(const vector<Imovel*>& imoveis, const string& pr
 }
 
 void imprimirOuSalvar(const vector<Imovel*>& imoveis) {
-    int escolha;
+    char escolha;
     system("clear");
     cout << "Opção [1] -> Mostrar todos na tela.\nOpção [2] -> Salvar todos em um arquivo."<<endl;
     cout << "\nEscolha uma opção: ";
     cin >> escolha;
     system("clear");
 
-    if (escolha == 2) {
+    if (escolha == '2') {
         ofstream arquivo("saida.txt");
 
         if (!arquivo.is_open()) {
@@ -114,7 +114,7 @@ void imprimirOuSalvar(const vector<Imovel*>& imoveis) {
 
         cout << "Arquivo criado com nome: saida.txt\n" << endl;
 
-    } else if (escolha == 1) {
+    } else if (escolha == '1') {
         for (const Imovel* imovel : imoveis) {
             if (const Casa* casa = dynamic_cast<const Casa*>(imovel)) {
                 cout << *casa;
@@ -127,7 +127,7 @@ void imprimirOuSalvar(const vector<Imovel*>& imoveis) {
         }
 
     } else {
-        cout << "[!] Alternativa inválido\n" << endl;
+        cout << "[!] Alternativa inválido\n" << endl;        
     }
 }
 
