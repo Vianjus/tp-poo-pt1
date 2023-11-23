@@ -35,9 +35,9 @@ int main(){
   vector <vector<Imovel*> :: iterator> iteradores;
   bool possui;
 
+  system("clear");
   do //Menu da Imobiliária
   {
-    //cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
     cout<<"Menu da imobiliária"<<endl;
     cout<<"\nOpção [1] -> Verificar se o nome possui algum imóvel."<<endl;
     cout<<"Opção [2] -> Verficar imóveis compatíveis com o valor."<<endl;
@@ -45,31 +45,32 @@ int main(){
     cout<<"Opção [4] -> Verificar todos os imóveis por tipo."<<endl;
     cout<<"Opção [5] -> Verificar imóveis em de uma cidade."<<endl;
     cout<<"Opção [6] -> Verificar imóveis de um proprietário."<<endl;
-    cout<<"Opção [7] -> Criar arquivo de saída."<<endl;
+    cout<<"Opção [7] -> Visualizar todos os dados."<<endl;
     cout<<"Opção [0] -> Encerrar o programa."<<endl;
-    cout<<"\nDigite a operação: "; cin>>aux;
+    cout<<"\nDigite a operação:"; cin>>aux;
 
     
 
     switch (aux)
     {
     case 0: //Opção [0] -> Encerrar o programa.
-      //system("clear");
-      cout<<"Fechando programa ..."<<endl;
+      system("clear");
+      cout<<"[X] Programa finalizado."<<endl;
       break;
 
     case 1: //Opção [1] -> Verificar se o nome possui algum imóvel
-      cout << "PROPRIETARIO NOME: " << endl;
+      cout << "Digite o nome:";
       cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
       getline(cin, nomeProp);
 
+      system("clear");
       possui = possuiImovelDoProprietario(imoveis, nomeProp);
       if (possui) {
         cout << "O proprietário possui pelo menos um imóvel." << endl;
         } else {
         cout << "O proprietário não possui nenhum imóvel." << endl;
         }
-      cout<< "Pressione qualquer tecla para retornar.";
+      cout<< "\nPressione qualquer tecla para retornar.";
       getchar();
       system("clear");
       break;
@@ -78,25 +79,31 @@ int main(){
       cout << "Digite o valor: " ;
       cin >> valor;
       cout << endl;
+      system("clear");
 
       imoveisPorValor = obterImoveisAbaixoValor(valor, imoveis);
+      if (imoveisPorValor.begin() == imoveisPorValor.end())
+      {
+        cout<<"[!] Não possui nenhum imóvel com esse valor ou menos!"<<endl;
+      }
+      
       for(auto it = imoveisPorValor.begin();it != imoveisPorValor.end(); it++){
         cout << **it << endl; 
         cout<< "-------------------------------------"<<endl;
       }
 
-      cout<< "Pressione qualquer tecla para retornar.";
+      cout<< "\nPressione qualquer tecla para retornar.";
       getchar();
       getchar();
       system("clear");
       break;
 
     case 3: //Opção [3] -> Verificar imóveis compatíveis com a quantidade de quartos requerida.
-      cout << "Insira o número de quartos" << endl;
+      cout << "Insira o número de quartos:";
       cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
       cin>>n;
       imoveisPorQuartos = obterImoveisPorQuartos(imoveis,n);
-      
+      system("clear");
       for(auto it = imoveisPorQuartos.begin();it != imoveisPorQuartos.end(); it++){
         cout << **it; 
         cout<< "-------------------------------------"<<endl;
@@ -114,7 +121,10 @@ int main(){
       
       cout << "Insira o tipo do imovel: "; 
       cin>>tipo;
+      system("clear");
       imoveisOrdenados = obterImoveisPorTipo(imoveis, tipo);
+      if(imoveisOrdenados.begin()==imoveisOrdenados.end())
+        cout<<"[!] Tipo inválido ou nenhuma casa com esse tipo.\n"<<endl;
 
       cout<< "Pressione qualquer tecla para retornar.";
       getchar();
@@ -127,7 +137,11 @@ int main(){
       cout << "Digite o nome da cidade: " ;
       getchar();
       getline(cin, cidade);
+      system("clear");
       imoveisPorCidade = imoveisPorCidadeDescresc(imoveis, cidade);
+      if (imoveisPorCidade.begin()==imoveisPorCidade.end())
+        cout<<"[!] Não há nenhum imóvel nessa cidade!\n"<<endl;
+      
       
       for(auto it = imoveisPorCidade.begin();it != imoveisPorCidade.end(); it++){
         cout << **it; 
@@ -149,7 +163,8 @@ int main(){
       iteradores = getIterators(imoveis,nomeProp);
 
       for(auto it = iteradores.begin();it != iteradores.end();it++){
-        cout << ***it << endl;
+        cout << ***it;
+        cout<<"-------------------------------------"<<endl;
       }
 
       cout<< "Pressione qualquer tecla para retornar.";

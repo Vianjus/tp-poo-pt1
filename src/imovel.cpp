@@ -86,12 +86,14 @@ bool possuiImovelDoProprietario(const vector<Imovel*>& imoveis, const string& pr
 }
 
 void imprimirOuSalvar(const vector<Imovel*>& imoveis) {
-    char escolha;
-
-    cout << "Deseja salvar ou imprimir? (S para salvar, I para imprimir): ";
+    int escolha;
+    system("clear");
+    cout << "Opção [1] -> Mostrar todos na tela.\nOpção [2] -> Salvar todos em um arquivo."<<endl;
+    cout << "\nEscolha uma opção: ";
     cin >> escolha;
+    system("clear");
 
-    if (escolha == 'S' || escolha == 's') {
+    if (escolha == 2) {
         ofstream arquivo("saida.txt");
 
         if (!arquivo.is_open()) {
@@ -110,9 +112,9 @@ void imprimirOuSalvar(const vector<Imovel*>& imoveis) {
             arquivo << "------------------------" << endl;
         }
 
-        cout << "Saída salva no arquivo 'saida.txt'." << endl;
+        cout << "Arquivo criado com nome: saida.txt\n" << endl;
 
-    } else if (escolha == 'I' || escolha == 'i') {
+    } else if (escolha == 1) {
         for (const Imovel* imovel : imoveis) {
             if (const Casa* casa = dynamic_cast<const Casa*>(imovel)) {
                 cout << *casa;
@@ -125,7 +127,7 @@ void imprimirOuSalvar(const vector<Imovel*>& imoveis) {
         }
 
     } else {
-        cout << "Escolha inválida. Nada será feito." << endl;
+        cout << "[!] Alternativa inválido\n" << endl;
     }
 }
 
@@ -159,17 +161,20 @@ vector<Imovel*> obterImoveisPorTipo(const std::vector<Imovel*>& imoveis, const s
             if(tipo == "casa"){
                 if (const Casa* casa = dynamic_cast<const Casa*>(imovel)) {
                     cout << *casa;
+                    cout << "------------------------" << endl;
                 } 
             }else if (tipo =="apartamento"){
                 if(const Apartamento* apartamento = dynamic_cast<const Apartamento*>(imovel)) {
-                cout << *apartamento;}
+                    cout << *apartamento;
+                    cout << "------------------------" << endl;
+                }
             } else if (tipo =="chacara"){
                 if(const Chacara* chacara = dynamic_cast<const Chacara*>(imovel)) {
-                cout << *chacara;
+                    cout << *chacara;
+                    cout << "------------------------" << endl;
                 }
             }
             
-            cout << "------------------------" << endl;
         }
     }
 
